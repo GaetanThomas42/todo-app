@@ -1,140 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>TODO LIST</title>
   </head>
   <body>
 <body class="bg-gray-100 min-h-screen">
-<div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Ma TODO LIST</h1>
+
+ <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">TODO LIST</h1>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Colonne Notes -->
-            <div class="bg-blue-50 rounded-lg p-4 shadow-md">
-                <h2 class="text-xl font-semibold mb-4 text-blue-800 flex items-center">
-                    <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
-                    Notes
-                </h2>
-                
-                <!-- Formulaire d'ajout -->
-                <form class="mb-4" data-status="note">
-                    <div class="flex flex-col space-y-2">
-                        <input 
-                            type="text" 
-                            placeholder="Ajouter une note..."
-                            class="px-3 py-2 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
-                            required
-                        >
-                        <button 
-                            type="submit"
-                            class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-md text-sm transition-colors"
-                        >
-                            + Ajouter
-                        </button>
-                    </div>
-                </form>
-                
-                <!-- Liste des todos -->
-                <div id="note-todos" class="space-y-2">
-                    <!-- Les todos seront ajoutés ici dynamiquement -->
-                </div>
-            </div>
-
-            <!-- Colonne À faire -->
-            <div class="bg-yellow-50 rounded-lg p-4 shadow-md">
-                <h2 class="text-xl font-semibold mb-4 text-yellow-800 flex items-center">
-                    <span class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></span>
-                    À faire
-                </h2>
-                
-                <!-- Formulaire d'ajout -->
-                <form class="mb-4" data-status="a_faire">
-                    <div class="flex flex-col space-y-2">
-                        <input 
-                            type="text" 
-                            placeholder="Ajouter une tâche..."
-                            class="px-3 py-2 border border-yellow-200 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm"
-                            required
-                        >
-                        <button 
-                            type="submit"
-                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 rounded-md text-sm transition-colors"
-                        >
-                            + Ajouter
-                        </button>
-                    </div>
-                </form>
-                
-                <!-- Liste des todos -->
-                <div id="a_faire-todos" class="space-y-2">
-                    <!-- Les todos seront ajoutés ici dynamiquement -->
-                </div>
-            </div>
-
-            <!-- Colonne En cours -->
-            <div class="bg-orange-50 rounded-lg p-4 shadow-md">
-                <h2 class="text-xl font-semibold mb-4 text-orange-800 flex items-center">
-                    <span class="w-3 h-3 bg-orange-500 rounded-full mr-2"></span>
-                    En cours
-                </h2>
-                
-                <!-- Formulaire d'ajout -->
-                <form class="mb-4" data-status="en_cours">
-                    <div class="flex flex-col space-y-2">
-                        <input 
-                            type="text" 
-                            placeholder="Ajouter une tâche en cours..."
-                            class="px-3 py-2 border border-orange-200 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
-                            required
-                        >
-                        <button 
-                            type="submit"
-                            class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-2 rounded-md text-sm transition-colors"
-                        >
-                            + Ajouter
-                        </button>
-                    </div>
-                </form>
-                
-                <!-- Liste des todos -->
-                <div id="en_cours-todos" class="space-y-2">
-                    <!-- Les todos seront ajoutés ici dynamiquement -->
-                </div>
-            </div>
-
-            <!-- Colonne Agenda -->
-            <div class="bg-green-50 rounded-lg p-4 shadow-md">
-                <h2 class="text-xl font-semibold mb-4 text-green-800 flex items-center">
-                    <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
-                    Agenda
-                </h2>
-                
-                <!-- Formulaire d'ajout -->
-                <form class="mb-4" data-status="agenda">
-                    <div class="flex flex-col space-y-2">
-                        <input 
-                            type="text" 
-                            placeholder="Ajouter un événement..."
-                            class="px-3 py-2 border border-green-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400 text-sm"
-                            required
-                        >
-                        <button 
-                            type="submit"
-                            class="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-md text-sm transition-colors"
-                        >
-                            + Ajouter
-                        </button>
-                    </div>
-                </form>
-                
-                <!-- Liste des todos -->
-                <div id="agenda-todos" class="space-y-2">
-                    <!-- Les todos seront ajoutés ici dynamiquement -->
-                </div>
-            </div>
+        <div id="columns-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Les colonnes seront générées dynamiquement ici -->
         </div>
 
         <!-- Bouton pour vider toutes les listes -->
@@ -147,6 +27,7 @@
             </button>
         </div>
     </div>
+
    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
