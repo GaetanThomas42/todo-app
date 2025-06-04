@@ -1,6 +1,6 @@
 import { TodoManager } from "./services/TodoManager.js";
 import { TodoRenderer } from "./utils/TodoRenderer.js";
-import { columnsConfig } from "./config/statusConfig.js";
+
 // Application principale
         class TodoApp {
             constructor() {
@@ -71,25 +71,13 @@ import { columnsConfig } from "./config/statusConfig.js";
                 // Événement quand on commence à faire glisser
                 document.addEventListener('dragstart', (e) => {
                     if (e.target.draggable) {
+
                         draggedElement = e.target;
                         draggedTodoId = parseInt(e.target.dataset.todoId);
                         e.target.style.opacity = '0.5';
                         
                         // Effet visuel sur l'élément glissé
                         e.target.classList.add('rotate-2', 'scale-105');
-                    }
-                });
-
-                // Événement quand on arrête de faire glisser
-                document.addEventListener('dragend', (e) => {
-                    if (e.target.draggable) {
-                        e.target.style.opacity = '1';
-                        e.target.classList.remove('rotate-2', 'scale-105');
-                        
-                        // Nettoyer tous les indicateurs visuels
-                        document.querySelectorAll('[data-column]').forEach(column => {
-                            column.classList.remove('border-blue-300', 'bg-blue-50');
-                        });
                     }
                 });
 
@@ -103,7 +91,7 @@ import { columnsConfig } from "./config/statusConfig.js";
                         dropZone.classList.add('border-blue-300', 'bg-blue-50');
                     }
                 });
-
+                
                 // Événement quand on quitte une zone de dépôt
                 document.addEventListener('dragleave', (e) => {
                     const dropZone = e.target.closest('[data-column]');
@@ -112,6 +100,20 @@ import { columnsConfig } from "./config/statusConfig.js";
                         if (!dropZone.contains(e.relatedTarget)) {
                             dropZone.classList.remove('border-blue-300', 'bg-blue-50');
                         }
+                    }
+                });
+
+                // Événement quand on arrête de faire glisser
+                document.addEventListener('dragend', (e) => {
+                    if (e.target.draggable) {
+
+                        e.target.style.opacity = '1';
+                        e.target.classList.remove('rotate-2', 'scale-105');
+                        
+                        // Nettoyer tous les indicateurs visuels
+                        document.querySelectorAll('[data-column]').forEach(column => {
+                            column.classList.remove('border-blue-300', 'bg-blue-50');
+                        });
                     }
                 });
 
