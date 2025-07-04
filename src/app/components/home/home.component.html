@@ -1,0 +1,150 @@
+<div class="min-h-screen bg-gray-50">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-5xl font-bold mb-6">EZ CLIM</h1>
+      <p class="text-xl p-8">
+        Votre spécialiste en climatisation, ventilation et rafraîchissement.
+        Des solutions efficaces pour votre confort toute l'année.
+      </p>
+      <button
+        mat-raised-button
+        color="blue-600"
+
+        class="!text-lg !px-8 !py-3"
+        routerLink="/articles">
+        Découvrir nos produits
+      </button>
+    </div>
+  </section>
+
+  <!-- Présentation -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">
+          Pourquoi choisir EZ CLIM ?
+        </h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Depuis plus de 10 ans, nous sommes votre partenaire de confiance pour tous vos besoins
+          en climatisation et ventilation. Notre expertise technique et notre service client
+          exceptionnel font de nous le leader du marché.
+        </p>
+        <div class="grid md:grid-cols-3 gap-8 mt-12">
+          <div class="text-center">
+            <mat-icon class="!text-blue-600 mb-4">ac_unit</mat-icon>
+            <h3 class="text-xl font-semibold mb-2">Climatisation</h3>
+            <p class="text-gray-600">
+              Systèmes de climatisation performants et économiques pour votre maison ou bureau.
+            </p>
+          </div>
+          <div class="text-center">
+            <mat-icon class="!text-blue-600 mb-4">toys</mat-icon>
+            <h3 class="text-xl font-semibold mb-2">Ventilation</h3>
+            <p class="text-gray-600">
+              Ventilateurs et systèmes de ventilation pour un air pur et frais.
+            </p>
+          </div>
+          <div class="text-center">
+            <mat-icon class="!text-blue-600 mb-4">support_agent</mat-icon>
+            <h3 class="text-xl font-semibold mb-2">Service Expert</h3>
+            <p class="text-gray-600">
+              Installation, maintenance et conseils personnalisés par nos experts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Produits Phares -->
+  <section class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+        Nos Produits Phares
+      </h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <mat-card class="hover:shadow-lg transition-shadow duration-300">
+          <div class="h-48 bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center">
+            <mat-icon class=" !text-blue-600">ac_unit</mat-icon>
+          </div>
+          <mat-card-content class="p-6">
+            <h3 class="text-xl text-blue-600 font-semibold p-2 mb-2">Climatiseurs Split</h3>
+            <p class="text-white mb-4">
+              Climatiseurs muraux haute performance avec technologie inverter pour un confort optimal.
+            </p>
+            <div class="text-2xl font-bold text-blue-600 mb-4">À partir de 599€</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="hover:shadow-lg transition-shadow duration-300">
+          <div class="h-48 bg-gradient-to-br from-green-100 to-teal-100 flex items-center justify-center">
+            <mat-icon class="!text-green-600">toys</mat-icon>
+          </div>
+          <mat-card-content class="p-6">
+            <h3 class="text-xl text-green-600 font-semibold p-2 mb-2">Ventilateurs</h3>
+            <p class="text-white  mb-4">
+              Large gamme de ventilateurs : sur pied, de plafond, tour, pour tous vos besoins.
+            </p>
+            <div class="text-2xl font-bold text-green-600 mb-4">À partir de 49€</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="hover:shadow-lg transition-shadow duration-300">
+          <div class="h-48 bg-gradient-to-br from-purple-100 to-indigo-100 flex items-center justify-center">
+            <mat-icon class=" !text-purple-600">device_thermostat</mat-icon>
+          </div>
+          <mat-card-content class="p-6">
+            <h3 class="text-xl font-semibold mb-2 p-2 text-purple-600">Pompes à Chaleur</h3>
+            <p class="text-white  mb-4">
+              Solutions écologiques et économiques pour chauffer et rafraîchir votre habitat.
+            </p>
+            <div class="text-2xl font-bold text-purple-600 mb-4">À partir de 1299€</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Final -->
+  <section class="py-16 bg-blue-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">
+        Prêt à améliorer votre confort ?
+      </h2>
+      <p class="text-xl p-8  mx-auto">
+        Découvrez notre catalogue complet et trouvez la solution parfaite pour votre maison ou bureau.
+      </p>
+      <button
+        mat-raised-button
+        color="accent"
+        class="!text-lg !px-8 !py-3 mr-4"
+        routerLink="/articles">
+        Voir tous nos produits
+      </button>
+      <button
+        mat-stroked-button
+        class="!text-lg !px-8 !py-3 !text-white !border-white">
+        Nous contacter
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <div class="mb-4">
+        <h3 class="text-2xl font-bold mb-2">EZ CLIM</h3>
+        <p class="text-gray-400">Votre confort, notre priorité</p>
+      </div>
+      <div class="flex justify-center space-x-6 text-sm">
+        <a href="#" class="hover:text-blue-400 transition-colors">Mentions légales</a>
+        <a href="#" class="hover:text-blue-400 transition-colors">CGV</a>
+        <a href="#" class="hover:text-blue-400 transition-colors">Contact</a>
+      </div>
+      <div class="mt-4 text-gray-400 text-sm">
+        © 2024 EZ CLIM. Tous droits réservés.
+      </div>
+    </div>
+  </footer>
+</div>
