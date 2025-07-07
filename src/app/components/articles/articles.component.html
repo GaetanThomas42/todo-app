@@ -3,37 +3,38 @@
   <div class="max-w-6xl mx-auto mb-8">
     <mat-card class="p-6">
       <h2 class="text-2xl font-bold text-white mb-6">Rechercher des articles</h2>
-
-      <form class="space-y-4">
+      <form class="space-y-4" [formGroup]="searchForm" (ngSubmit)="search()">
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+
           <!-- Champ de recherche par titre -->
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Rechercher par titre</mat-label>
-            <input matInput placeholder="Ex: Ventilateur" type="text">
+            <label class="text-white">Rechercher par titre</label>
+            <input matInput formControlName="title" placeholder="Ex: Ventilateur" type="text">
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
 
           <!-- Prix maximum -->
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Prix maximum</mat-label>
-            <input matInput placeholder="Ex: 500" type="number" min="0">
+            <label class="text-white">Prix maximum</label>
+            <input matInput formControlName="priceMax" placeholder="Ex: 500" type="number" min="0">
             <span matSuffix>€</span>
           </mat-form-field>
 
           <!-- Checkbox promo -->
-          <div class="flex items-center h-14">
-            <mat-checkbox class="!text-blue-600">
-              Promotions uniquement
-            </mat-checkbox>
+          <div class="flex items-center">
+            <mat-checkbox  formControlName="hasDiscount" class="!text-blue-600">
+            Promotions uniquement</mat-checkbox>
           </div>
 
           <!-- Boutons -->
-          <div class="flex gap-2 items-center">
+          <div class="flex gap-2 items-center text-white">
+            <!-- Ce bouton soumet le formulaire -->
             <button mat-raised-button color="primary" type="submit" class="!px-6">
               <mat-icon>search</mat-icon>
               Rechercher
             </button>
-            <button mat-stroked-button type="button" class="!px-4">
+
+            <button mat-stroked-button type="button" (click)="refreshFilters()" class="!px-4">
               <mat-icon>refresh</mat-icon>
               Reset
             </button>
@@ -46,59 +47,61 @@
   <!-- Liste des articles -->
   <div class="max-w-6xl mx-auto">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-3xl font-bold text-gray-800">Nos Articles</h2>
+      <h2 class="text-3xl font-bold">
+        Nos Articles
+      </h2>
       <div class="text-gray-600">
-        {{ articles.length }} articles trouvés
+        {{ filteredArticles.length }} articles disponibles
       </div>
     </div>
 
-    <!-- Grille d'articles -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      @for (article of articles; track article.id) {
+  @if(!isLoading){
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (article of filteredArticles; track article.id) {
+
         <mat-card
           class="hover:shadow-xl transition-all transform hover:scale-105 duration-300 cursor-pointer overflow-hidden"
           [ngClass]="article.discountPercent > 0 ? 'ring-2 ring-red-500':'' ">
+          <!--  👆 Bordure rouge seulement pour le articles en promo -->
 
-          <!-- Badge promo -->
+          <!-- Badge promo seulement pour le articles en promo -->
           @if (article.discountPercent > 0) {
             <div class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm font-bold z-10">
+              <!-- Affichage du % de reduction -->
               -{{ (article.discountPercent * 100) | number:'1.0-0' }}%
             </div>
           }
 
-          <!-- Image -->
           <div class="relative h-48 overflow-hidden">
+            <!-- Property Binding de src et alt -->
             <img
               [src]="article.image"
               [alt]="article.title"
               class="w-full h-full object-cover">
 
-            <!-- Overlay au hover -->
-            <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-            </div>
+
           </div>
 
           <mat-card-content class="p-4">
-            <!-- Titre -->
-            <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
-              {{ article.title |titlecase }}
+            <h3 class="text-lg font-semibold text-white mb-2 line-clamp-2">
+              <!-- Titre -->
+              {{ article.title }}
             </h3>
 
-            <!-- Description -->
             <p class="text-gray-600 text-sm mb-3 line-clamp-2">
-              {{ article.description | truncate:50  }}
+              <!-- Description, pipe custom afin de tronqué le texte a 50 caractères suivi de '...' -->
+              {{ article.description | truncate:50:'...'  }}
             </p>
 
-            <!-- Features -->
             <div class="flex flex-wrap gap-2 mb-4">
+              <!-- Boucle sur le tableau de Feature contenu dans chaque article -->
               @for (feature of article.features; track feature.title) {
                 <div class="flex items-center bg-gray-100 rounded-full px-2 py-1 text-xs">
                   <mat-icon class="!text-sm mr-1 !text-blue-600">{{ feature.icon }}</mat-icon>
-                  <span class="text-gray-700">{{ feature.title }}</span>
+                  <span class="text-white-700">{{ feature.title }}</span>
                 </div>
               }
             </div>
-
             <!-- Prix -->
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-2">
@@ -106,14 +109,12 @@
                   <span class="text-2xl font-bold text-red-600">
                     {{ (article.fullPrice * (1 - article.discountPercent)) | currency:'EUR':'symbol':'1.2-2' }}
                   </span>
-                  <span class="text-sm text-gray-500 line-through">
-                    {{ article.fullPrice | currency:'EUR':'symbol':'1.2-2' }}
-                  </span>
-                } @else {
-                  <span class="text-2xl font-bold text-gray-800">
-                    {{ article.fullPrice | currency:'EUR':'symbol':'1.2-2' }}
-                  </span>
                 }
+                  <span [ngClass]="article.discountPercent === 0 ?'text-sm text-white line-through' : 'text-2xl font-bold text-white'">
+                    {{ article.fullPrice | currency:'EUR':'symbol':'1.2-2' }}
+                  </span>
+
+
               </div>
 
             </div>
@@ -123,12 +124,23 @@
     </div>
 
     <!-- Message si aucun article -->
-    @if (articles.length === 0) {
+    @if (filteredArticles.length === 0) {
       <div class="text-center py-12">
-        <mat-icon class="!text-6xl text-gray-400 mb-4">search_off</mat-icon>
-        <h3 class="text-xl text-gray-600 mb-2">Aucun article trouvé</h3>
-        <p class="text-gray-500">Essayez de modifier vos critères de recherche</p>
+        <mat-icon class="!text-6xl text-white mb-4">
+          search_off
+        </mat-icon>
+        <h3 class="text-xl text-gray-600 mb-2">
+          Aucun article trouvé
+        </h3>
+        <p class="text-white">
+          Essayez de modifier vos critères de recherche
+        </p>
       </div>
     }
+  }@else {
+    <div class="flex justify-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
   </div>
 </div>
